@@ -1,0 +1,14 @@
+com\ibm\order\model\OrderMenuItem.class
+com\ibm\order\model\MenuItem.class
+com\ibm\order\endpoint\MenuEndpointImpl.class
+com\ibm\order\endpoint\MenuEndpoint.class
+com\ibm\order\model\Order.class
+com\ibm\order\service\OrderService.class
+com\ibm\order\model\OrderInput.class
+com\ibm\order\service\OrderServiceImpl.class
+com\ibm\order\rest\OrderController.class
+com\ibm\order\message\producer\OrderMessageProducerKafka.class
+com\ibm\order\message\producer\OrderMessageProducer.class
+com\ibm\order\repo\OrderRepo.class
+com\ibm\order\OrderApplication.class
+com\ibm\order\model\OrderInputMenuItem.class
