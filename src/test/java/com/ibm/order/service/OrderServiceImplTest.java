@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.ibm.order.endpoint.MenuEndpoint;
+import com.ibm.order.message.producer.OrderMessageProducer;
 import com.ibm.order.model.MenuItem;
 import com.ibm.order.model.Order;
 import com.ibm.order.model.OrderInput;
@@ -29,6 +30,9 @@ public class OrderServiceImplTest {
 	
 	@Mock
 	OrderRepo orderRepo;
+	
+	@Mock
+	OrderMessageProducer orderMessageProducer;
 	
 	@InjectMocks
 	OrderServiceImpl orderService;
@@ -51,10 +55,6 @@ public class OrderServiceImplTest {
 		MenuItem menuItem2 = new MenuItem(menuItemNumber2, "Veggies", "Salad", "Caesar Salad", 100, 2.0);
 		when(menuEndpoint.getMenuItem(menuItemNumber2)).thenReturn(menuItem2);
 		
-		// Need to mock the Order output because of the mongodb insert.
-		Order orderData = new Order("CUST123", null, 25.0);
-		when(orderRepo.insert(Mockito.any(Order.class))).thenReturn(orderData);
-		
 		// Prepare the OrderInput
 		List<OrderInputMenuItem> orderInputMenuItem = new ArrayList<OrderInputMenuItem>();
 		OrderInputMenuItem item1 = new OrderInputMenuItem("123", 3);
@@ -65,8 +65,6 @@ public class OrderServiceImplTest {
 		
 		// Call the addOrder from the Order Service.
 		Order order = orderService.addOrder(orderInput);
-		
-		
 		
 		assertEquals(order.getOrderPrice(), 25.0, "Order Price is incorrect");
 		verify(menuEndpoint).getMenuItem(menuItemNumber1);
