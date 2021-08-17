@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderNumber(orderInput.getOrderNumber());
 		
 		// Insert order in mongodb
-		order = this.orderRepo.insert(order);
+		this.orderRepo.insert(order);
 		
 		// Send event that order was added.
 		this.sendOrderAddedEvent(order);
